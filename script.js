@@ -4,12 +4,31 @@
 
 function openLetter() {
 
+    // PLAY MUSIC
+    const music = document.getElementById("bgMusic");
+
+    if (music) {
+        music.play()
+            .then(() => {
+                const musicButton = document.getElementById("musicButton");
+
+                if (musicButton) {
+                    musicButton.innerHTML = "♫ PAUSE MUSIC";
+                }
+            })
+            .catch((error) => {
+                console.log("Music tidak dapat dimainkan:", error);
+            });
+    }
+
+    // SCROLL KE LETTER
     const letter = document.getElementById("letter");
 
     letter.scrollIntoView({
         behavior: "smooth"
     });
 
+    // FLOATING HEARTS
     createHearts();
 }
 
