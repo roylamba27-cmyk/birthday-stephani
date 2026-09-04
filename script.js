@@ -172,30 +172,40 @@ setInterval(updateCountdown, 1000);
 const music = document.getElementById("bgMusic");
 const musicButton = document.getElementById("musicButton");
 
+function updateMusicButton() {
+    if (music.paused) {
+        musicButton.innerHTML = "♫ PLAY MUSIC";
+    } else {
+        musicButton.innerHTML = "♫ PAUSE MUSIC";
+    }
+}
+
+// Coba mulai musik otomatis saat website dibuka
+window.addEventListener("load", () => {
+    music.play()
+        .then(() => {
+            updateMusicButton();
+        })
+        .catch(() => {
+            // Browser mungkin memblokir autoplay
+            updateMusicButton();
+        });
+});
 
 function toggleMusic() {
-
     if (music.paused) {
-
         music.play()
             .then(() => {
-
-                musicButton.innerHTML = "♫ PAUSE MUSIC";
-
+                updateMusicButton();
             })
             .catch((error) => {
-
                 console.log("Musik tidak dapat dimainkan:", error);
-
             });
-
     } else {
-
         music.pause();
-
-        musicButton.innerHTML = "♫ PLAY MUSIC";
-
+        updateMusicButton();
     }
+}
 
 }// =================================
 // PHOTO SCROLL ANIMATION
